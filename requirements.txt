@@ -1,0 +1,25 @@
+# Core dependencies
+langchain>=0.3.0
+openai>=1.0.0
+chromadb>=1.0.0  # Note: changed from chroma-core
+python-dotenv>=1.0.0
+
+# Document processing
+unstructured>=0.15.0
+markdown>=3.6.0
+
+# UI and formatting
+rich>=13.7.0
+
+# Data processing and evaluation
+numpy>=1.24.3,<2.0.0
+pandas>=2.0.3
+
+# Optional: for improved markdown parsing
+python-markdown-math>=0.8
+
+# Optional: for improved PDF handling
+pypdf>=4.0.0  # Note: changed from pypdf2
+
+# Optional: for improved docx handling
+python-docx>=1.1.0

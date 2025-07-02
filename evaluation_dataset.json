@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What are the strategic goals of our product?",
+    "expected_answer": "The strategic goals are Knowledge Management, Decision Support, Communication Bridge, and Consistency.",
+    "expected_sources": ["00_vision_and_strategy.md"]
+  },
+  {
+    "question": "When is the next milestone planned for completion?",
+    "expected_answer": "Milestone 1: Foundation is planned for the current quarter (Q3 2025).",
+    "expected_sources": ["01_roadmap.md"]
+  },
+  {
+    "question": "Who is the Tech Lead on our team?",
+    "expected_answer": "Sam Rivera is the Tech Lead with 80% allocation.",
+    "expected_sources": ["02_teams_and_allocation.md"]
+  },
+  {
+    "question": "What vector database are we using and why?",
+    "expected_answer": "We are using Chroma as our vector database because it's open-source, Python-native, and offers easy local deployment.",
+    "expected_sources": ["03_architecture_and_principles.md"]
+  },
+  {
+    "question": "What is our budget for Q4 2025?",
+    "expected_answer": "The total budget for Q4 2025 is $235,000, with $150,000 allocated to Development, $35,000 to Infrastructure, $20,000 to External Services, and $30,000 to Marketing & Growth.",
+    "expected_sources": ["02_teams_and_allocation.md"]
+  },
+  {
+    "question": "What are our design principles?",
+    "expected_answer": "Our design principles are User-Centric Design, Knowledge Integrity, Extensibility, Responsible AI, and Performance Efficiency.",
+    "expected_sources": ["03_architecture_and_principles.md"]
+  },
+  {
+    "question": "What is the target completion rate for sprints?",
+    "expected_answer": "Based on historical data, the average completion rate is 93%.",
+    "expected_sources": ["02_teams_and_allocation.md"]
+  },
+  {
+    "question": "What are the success metrics for our product?",
+    "expected_answer": "Success metrics include reduction in time spent searching for product information, improved alignment between teams, faster onboarding of new team members, and higher quality of product decisions.",
+    "expected_sources": ["00_vision_and_strategy.md"]
+  },
+  {
+    "question": "What is the architecture of our system?",
+    "expected_answer": "The system architecture consists of User Interface, Agent Service, Knowledge Base, LLM Provider, and Document Store components.",
+    "expected_sources": ["03_architecture_and_principles.md"]
+  },
+  {
+    "question": "When is Sam Rivera going to be absent?",
+    "expected_answer": "Sam Rivera will be absent from August 15-29, 2025.",
+    "expected_sources": ["02_teams_and_allocation.md"]
+  }
+]
