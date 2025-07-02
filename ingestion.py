@@ -14,7 +14,7 @@ import dotenv
 from langchain_community.document_loaders import TextLoader, UnstructuredMarkdownLoader
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from rich.console import Console
 from rich.progress import Progress, TaskID
 from langchain_openai import OpenAIEmbeddings

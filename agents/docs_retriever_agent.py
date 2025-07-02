@@ -8,10 +8,10 @@ import os
 from typing import Dict, List, Any, Optional
 
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain.prompts import PromptTemplate
-from langchain.vectorstores import Chroma
+from langchain_chroma import Chroma
 
 
 class DocsRetrieverAgent:
@@ -114,7 +114,7 @@ class DocsRetrieverAgent:
         if self.verbose:
             print(f"Querying: {question}")
             
-        result = self.qa_chain({"query": question})
+        result = self.qa_chain.invoke({"query": question})
         
         # Format the response
         response = {
