@@ -11,12 +11,13 @@ import sys
 from typing import List, Dict, Any, Optional
 
 import dotenv
-from langchain.document_loaders import TextLoader, UnstructuredMarkdownLoader
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.document_loaders import TextLoader, UnstructuredMarkdownLoader
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from rich.console import Console
 from rich.progress import Progress, TaskID
+from langchain_openai import OpenAIEmbeddings
 
 # Load environment variables
 dotenv.load_dotenv()
@@ -138,8 +139,6 @@ def create_vectorstore(document_chunks: List[Any], progress: Progress, task: Tas
         persist_directory=VECTORSTORE_DIR
     )
     
-    # Persist the vector store
-    vectorstore.persist()
     
     # Update progress
     progress.update(task, description="Vector store created and persisted", completed=1)
