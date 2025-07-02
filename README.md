@@ -21,7 +21,7 @@ An AI-powered assistant that helps product owners manage documentation, answer q
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/product-owner-agent.git
+git clone https://github.com/PradeepAgenticAI/product-owner-agent
 cd product-owner-agent
 ```
 
