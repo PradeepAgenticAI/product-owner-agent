@@ -44,7 +44,7 @@ def initialize_agent() -> DocsRetrieverAgent:
     try:
         return DocsRetrieverAgent(
             vectorstore_path=vectorstore_path,
-            model_name=os.getenv("LLM_MODEL", "gpt-4"),
+            model_name=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
             verbose=os.getenv("VERBOSE", "False").lower() == "true"
         )
     except FileNotFoundError as e:

@@ -48,5 +48,55 @@
     "question": "When is Sam Rivera going to be absent?",
     "expected_answer": "Sam Rivera will be absent from August 15-29, 2025.",
     "expected_sources": ["02_teams_and_allocation.md"]
+  },
+  {
+    "question": "What are the core principles from Sleuth's deployment guide?",
+    "expected_answer": "The core principles are Small Incremental Changes, Automated Testing, Continuous Integration, Deployment Automation, Monitoring and Observability, and Fast Rollbacks.",
+    "expected_sources": ["04_feature_blueprints_from_slueth.md"]
+  },
+  {
+    "question": "What are the four key metrics from the Accelerate book?",
+    "expected_answer": "The four key metrics are Deployment Frequency, Lead Time for Changes, Mean Time to Recover (MTTR), and Change Failure Rate.",
+    "expected_sources": ["05_accelerate_devops_principles.md"]
+  },
+  {
+    "question": "What is the RICE scoring model used for?",
+    "expected_answer": "The RICE scoring model is used for feature prioritization, where RICE stands for Reach, Impact, Confidence, and Effort.",
+    "expected_sources": ["07_decision_frameworks.md"]
+  },
+  {
+    "question": "What does the term 'Technical Debt' mean in our glossary?",
+    "expected_answer": "Technical Debt is the implied cost of additional rework caused by choosing an easy solution now instead of using a better approach that would take longer.",
+    "expected_sources": ["06_glossary_of_terms.md"]
+  },
+  {
+    "question": "What should a good user story include according to our templates?",
+    "expected_answer": "A good user story should include a title, the user story format (As a, I want, So that), acceptance criteria, priority, story points, dependencies, related stories, technical notes, mockups if applicable, and testing notes.",
+    "expected_sources": ["08_templates.md"]
+  },
+  {
+    "question": "What is our target for deployment frequency according to our roadmap?",
+    "expected_answer": "The target is 100+ deploys per day for continuous deployment of all non-breaking changes.",
+    "expected_sources": ["04_feature_blueprints_from_slueth.md"]
+  },
+  {
+    "question": "What cultural practices are recommended in the Accelerate principles?",
+    "expected_answer": "The cultural practices include Lean Management, Westrum Organizational Culture, Transformational Leadership, and Working in Small Batches.",
+    "expected_sources": ["05_accelerate_devops_principles.md"]
+  },
+  {
+    "question": "How should we evaluate a build vs. buy decision?",
+    "expected_answer": "We should use the Build vs. Buy Decision Framework with an evaluation matrix that considers factors like strategic importance, customization needs, time to market, costs, maintenance burden, integration complexity, scalability, and security requirements.",
+    "expected_sources": ["07_decision_frameworks.md"]
+  },
+  {
+    "question": "What is the format for a retrospective according to our templates?",
+    "expected_answer": "A retrospective should include a sprint summary, what went well, what could be improved, action items with owners and due dates, team mood, key learnings, and considerations for the next sprint.",
+    "expected_sources": ["08_templates.md"]
+  },
+  {
+    "question": "What is the difference between Continuous Delivery and Continuous Deployment in our glossary?",
+    "expected_answer": "Continuous Delivery is the practice of automatically preparing code changes for release to production, while Continuous Deployment is the practice of automatically deploying code changes to production after passing automated tests.",
+    "expected_sources": ["06_glossary_of_terms.md"]
   }
 ]

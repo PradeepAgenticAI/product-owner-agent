@@ -3,6 +3,8 @@
 
 This script evaluates the accuracy and relevance of the Product Owner Agent's
 responses against a golden dataset of questions and expected answers.
+It tests knowledge across all documentation, including deployment principles,
+DevOps practices, terminology, decision frameworks, and templates.
 """
 
 import json
@@ -60,7 +62,7 @@ def initialize_agent() -> DocsRetrieverAgent:
     try:
         return DocsRetrieverAgent(
             vectorstore_path=VECTORSTORE_DIR,
-            model_name=os.getenv("LLM_MODEL", "gpt-4"),
+            model_name=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
             verbose=False
         )
     except FileNotFoundError:
@@ -99,12 +101,32 @@ def evaluate_example(
     answer = response.get("answer", "")
     sources = [doc.get("metadata", {}).get("source", "") for doc in response.get("source_documents", [])]
     
-    # Calculate relevance score (simple keyword matching for demonstration)
-    # In a real system, use a more sophisticated semantic similarity measure
-    expected_keywords = set(expected_answer.lower().split())
-    answer_keywords = set(answer.lower().split())
+    # Calculate relevance score using improved keyword matching and phrase detection
+    # This better handles terminology from our expanded documentation
+    expected_lower = expected_answer.lower()
+    answer_lower = answer.lower()
+    
+    # Check for exact phrases (3+ word sequences) that appear in both
+    expected_words = expected_lower.split()
+    answer_words = answer_lower.split()
+    
+    # Extract phrases (3+ words) from expected answer
+    expected_phrases = []
+    for i in range(len(expected_words) - 2):
+        expected_phrases.append(' '.join(expected_words[i:i+3]))
+    
+    # Count phrases from expected answer that appear in agent's answer
+    phrase_matches = sum(1 for phrase in expected_phrases if phrase in answer_lower)
+    phrase_score = min(1.0, phrase_matches / max(1, len(expected_phrases) * 0.5))
+    
+    # Traditional keyword matching
+    expected_keywords = set(expected_words)
+    answer_keywords = set(answer_words)
     keyword_overlap = len(expected_keywords.intersection(answer_keywords))
-    relevance_score = min(1.0, keyword_overlap / max(1, len(expected_keywords) * 0.3))
+    keyword_score = min(1.0, keyword_overlap / max(1, len(expected_keywords) * 0.3))
+    
+    # Combined score with higher weight on phrase matching
+    relevance_score = 0.7 * phrase_score + 0.3 * keyword_score
     
     # Calculate source accuracy
     source_matches = 0
@@ -154,12 +176,34 @@ def run_evaluation() -> Tuple[List[Dict[str, Any]], Dict[str, float]]:
     source_scores = [r.get("source_score", 0.0) for r in results if "error" not in r]
     combined_scores = [r.get("combined_score", 0.0) for r in results if "error" not in r]
     
+    # Calculate documentation coverage metrics
+    all_expected_sources = []
+    for r in results:
+        if "error" not in r and "expected_sources" in r:
+            all_expected_sources.extend(r["expected_sources"])
+    
+    # Count unique sources and categorize by document type
+    unique_sources = set(all_expected_sources)
+    doc_categories = {
+        "vision_strategy": sum(1 for s in unique_sources if s.startswith("00_")),
+        "roadmap": sum(1 for s in unique_sources if s.startswith("01_")),
+        "teams": sum(1 for s in unique_sources if s.startswith("02_")),
+        "architecture": sum(1 for s in unique_sources if s.startswith("03_")),
+        "deployment": sum(1 for s in unique_sources if s.startswith("04_")),
+        "devops": sum(1 for s in unique_sources if s.startswith("05_")),
+        "glossary": sum(1 for s in unique_sources if s.startswith("06_")),
+        "decision_frameworks": sum(1 for s in unique_sources if s.startswith("07_")),
+        "templates": sum(1 for s in unique_sources if s.startswith("08_"))
+    }
+    
     metrics = {
         "avg_relevance_score": np.mean(relevance_scores) if relevance_scores else 0.0,
         "avg_source_score": np.mean(source_scores) if source_scores else 0.0,
         "avg_combined_score": np.mean(combined_scores) if combined_scores else 0.0,
         "num_examples": len(results),
-        "num_errors": sum(1 for r in results if "error" in r)
+        "num_errors": sum(1 for r in results if "error" in r),
+        "doc_coverage": doc_categories,
+        "total_unique_sources": len(unique_sources)
     }
     
     return results, metrics
@@ -184,8 +228,29 @@ def display_results(results: List[Dict[str, Any]], metrics: Dict[str, float]) ->
     metrics_table.add_row("Average Relevance Score", f"{metrics['avg_relevance_score']:.2f}")
     metrics_table.add_row("Average Source Score", f"{metrics['avg_source_score']:.2f}")
     metrics_table.add_row("Average Combined Score", f"{metrics['avg_combined_score']:.2f}")
+    metrics_table.add_row("Total Unique Sources", str(metrics["total_unique_sources"]))
     
     console.print(metrics_table)
+    
+    # Display documentation coverage metrics
+    console.print("\n[bold]Documentation Coverage:[/bold]")
+    
+    doc_table = Table(show_header=True, header_style="bold")
+    doc_table.add_column("Document Category")
+    doc_table.add_column("Coverage Count")
+    
+    doc_coverage = metrics["doc_coverage"]
+    doc_table.add_row("Vision & Strategy", str(doc_coverage["vision_strategy"]))
+    doc_table.add_row("Roadmap", str(doc_coverage["roadmap"]))
+    doc_table.add_row("Teams & Allocation", str(doc_coverage["teams"]))
+    doc_table.add_row("Architecture & Principles", str(doc_coverage["architecture"]))
+    doc_table.add_row("Deployment Principles (Sleuth)", str(doc_coverage["deployment"]))
+    doc_table.add_row("DevOps Principles (Accelerate)", str(doc_coverage["devops"]))
+    doc_table.add_row("Glossary of Terms", str(doc_coverage["glossary"]))
+    doc_table.add_row("Decision Frameworks", str(doc_coverage["decision_frameworks"]))
+    doc_table.add_row("Templates", str(doc_coverage["templates"]))
+    
+    console.print(doc_table)
     
     # Display detailed results
     console.print("\n[bold]Detailed Results:[/bold]")
