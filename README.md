@@ -64,6 +64,9 @@ Place your product documentation in the `docs/` directory. The system comes with
 - `03_architecture_and_principles.md`: System architecture and design principles
 - `04_feature_blueprints_from_slueth.md`: Implementation of Sleuth's deployment principles
 - `05_accelerate_devops_principles.md`: Key principles from "Accelerate: The Science of Lean Software and DevOps"
+- `06_glossary_of_terms.md`: Centralized glossary of product and technical terminology
+- `07_decision_frameworks.md`: Decision trees and frameworks for common product decisions
+- `08_templates.md`: Templates for common product management artifacts
 
 ## 🧪 Evaluation
 
