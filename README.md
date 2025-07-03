@@ -67,6 +67,7 @@ Place your product documentation in the `docs/` directory. The system comes with
 - `06_glossary_of_terms.md`: Centralized glossary of product and technical terminology
 - `07_decision_frameworks.md`: Decision trees and frameworks for common product decisions
 - `08_templates.md`: Templates for common product management artifacts
+- `09_product_state.md`: Current state of the product with feature and story tracking
 
 ## 🧪 Evaluation
 
