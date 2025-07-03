@@ -62,6 +62,8 @@ Place your product documentation in the `docs/` directory. The system comes with
 - `01_roadmap.md`: Product roadmap with milestones
 - `02_teams_and_allocation.md`: Team structure and resource allocation
 - `03_architecture_and_principles.md`: System architecture and design principles
+- `04_feature_blueprints_from_slueth.md`: Implementation of Sleuth's deployment principles
+- `05_accelerate_devops_principles.md`: Key principles from "Accelerate: The Science of Lean Software and DevOps"
 
 ## 🧪 Evaluation
 
